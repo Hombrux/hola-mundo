@@ -4,5 +4,4 @@ export interface Product{
     description?:string;
     type:string;
     photo:string;
-    color:string;
 }

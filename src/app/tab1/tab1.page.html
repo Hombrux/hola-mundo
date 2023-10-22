@@ -69,11 +69,11 @@
     </ion-grid>
   <ion-grid>
     <ion-row>
-      <ion-col size="12" *ngFor="let product of productsFounds; index as i">
-        <ion-card >
+      <ion-col size="6" *ngFor="let product of productsFounds; index as i">
+        <ion-card>
           <img [src]="product.photo+i">
           <ion-card-header>
-            <ion-card-title>{{product.name}} <ion-badge [color]="product.color"> {{product.type}}</ion-badge> </ion-card-title>
+            <ion-card-title>{{product.name}} <ion-badge [color]="getColor(product.type)"> {{product.type}}</ion-badge> </ion-card-title>
             <ion-card-subtitle> {{product.price | currency}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
@@ -85,19 +85,22 @@
       <ion-item-divider color="primary">
         <ion-label> Carrito </ion-label>
       </ion-item-divider>
-      <ion-col size="12" *ngFor="let product of productsShop">
-        <ion-card >
+      <ion-col size="12" *ngFor="let product of uniqueProducts">
+        <ion-card>
           <!-- <img [src]="product.photo"> -->
           <ion-card-header>
-            <ion-card-title>{{product.name}} <ion-badge [color]="product.type=='Abarrotes' ? 'primary' :'warning'"> {{product.type}}</ion-badge> </ion-card-title>
+            <ion-card-title>{{countProducttoCart(product) +" "+ product.name}} <ion-badge [color]="getColor(product.type)"> {{product.type}}</ion-badge> </ion-card-title>
             <ion-card-subtitle> {{product.price | currency}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             {{product.description}}
-            <ion-button (click)="deleteProducttoCart(product)">Eliminar</ion-button>
+            <ion-button (click)="deleteProducttoCart(product)" color="danger"><ion-icon name="trash-outline"></ion-icon>Eliminar</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
+      <ion-item-divider color="primary">
+        <ion-label > Total: {{precio}} </ion-label>
+      </ion-item-divider>
     </ion-row>
     </ion-grid>
 </ion-content>
