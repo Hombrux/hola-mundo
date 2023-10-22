@@ -15,6 +15,7 @@ export class Tab1Page {
   public productsShop: Product[]=[];
   public uniqueProducts:Set<Product> = new Set();
   public precio:number = 0;
+  public total:number = 0;
 
   public filter=[
     "Abarrotes",
@@ -26,49 +27,48 @@ export class Tab1Page {
     this.products.push({
       name:"Coca Cola",
       price:20,
-      description:"Lorem ipsum dolor sit amet.w",
       photo:"https://picsum.photos/670/300?random=",
       type:"Abarrotes"
     });
     this.products.push({
       name:"Gansito",
       price:30,
-      description:"Lorem ipsum dolor sit amet.w",
       photo:"https://picsum.photos/650/300?random=",
       type:"Abarrotes"
     });
     this.products.push({
       name:"Manzana",
       price:20,
-      description:"‎",
       photo:"https://picsum.photos/650/300?random=",
       type:"Frutas y verduras"
     });
     this.products.push({
       name:"Pera",
       price:20,
-      description:"‎",
       photo:"https://picsum.photos/650/300?random=",
       type:"Frutas y verduras"
     });
     this.products.push({
       name:"Mr Worldwide",
       price:30,
-      description:"‎",
       photo:"https://picsum.photos/650/300?random=",
       type:"Limpieza"
     });
     this.products.push({
       name:"Cloro",
       price:18,
-      description:"‎",
       photo:"https://picsum.photos/650/300?random=",
       type:"Limpieza"
     });
     this.products.push({
       name:"Aderall",
       price:100,
-      description:"‎",
+      photo:"https://picsum.photos/650/300?random=",
+      type:"Farmacia"
+    });
+    this.products.push({
+      name:"Paracetamol",
+      price:100,
       photo:"https://picsum.photos/650/300?random=",
       type:"Farmacia"
     });
@@ -104,7 +104,7 @@ export class Tab1Page {
   public addProducttoCart(producto:Product):void{
     this.productsShop.push(producto);
     this.uniqueProducts.add(producto);
-    this.precio+=producto.price;
+    this.total+=producto.price;
     console.log(this.uniqueProducts);
   }
 
@@ -113,11 +113,18 @@ export class Tab1Page {
     if(this.countProducttoCart(producto)==0){
       this.uniqueProducts.delete(producto);
     }
-    this.precio-=producto.price;
+    this.total-=producto.price;
   }
 
   public countProducttoCart(producto:Product):number{
     return this.productsShop.filter(p=> p===producto).length;
+  }
+
+  public precioProducto(producto:Product):number{
+    if (this.productsShop.filter(p=> p===producto)) {
+      return producto.price*this.countProducttoCart(producto);
+    }
+    return 0;
   }
 
   //

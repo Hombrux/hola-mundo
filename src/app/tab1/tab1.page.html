@@ -1,47 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
-      <!-- <ion-button (click)="selectType('Abarrotes')" size="small" style="margin-top: 0; margin-left: 20px;" color="primary">Abarrotes</ion-button>
-      <ion-button (click)="selectType('Frutas y verduras')" size="small" style="margin-top: 0;" color="warning">Frutas y verduras</ion-button>
-      <ion-button (click)="selectType('Limpieza')" size="small" style="margin-top: 0;" color="danger">Limpieza</ion-button> -->
+      Productos
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<!-- 
-<ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <div *ngFor="let product of products; index as i" style="display:inherit;">
-      <ion-col size="6" *ngIf="product.type=== typeProduct && statusType==true">
-        <ion-card >
-          <img [src]="product.photo">
-          <ion-card-header>
-            <ion-card-title>{{product.name}} <ion-badge [color]="product.type=='Abarrotes' ? 'primary' :'warning'"> {{product.type}}</ion-badge> </ion-card-title>
-            <ion-card-subtitle> {{product.price | currency}}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            {{product.description}}
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6" *ngIf="statusType===false">
-        <ion-card >
-          <img [src]="product.photo">
-          <ion-card-header>
-            <ion-card-title>{{product.name}} <ion-badge [color]="product.type=='Abarrotes' ? 'primary' :'secondary'"> {{product.type}}</ion-badge> </ion-card-title>
-            <ion-card-subtitle> {{product.price | currency}}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            {{product.description}}
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </div>
-    </ion-row>
-    </ion-grid>
-</ion-content> -->
 
 <ion-content [fullscreen]="true">
   <ion-grid>
@@ -49,8 +12,7 @@
       <ion-col size="12">
         <ion-select label="Tipo" [multiple]="true" interface="popover" label-placement="floating" 
          [(ngModel)]="filter"
-         (ionChange)="filterProducts()"
-        >
+         (ionChange)="filterProducts()">
           <ion-select-option value="Abarrotes">
             Abarrotes
           </ion-select-option>
@@ -67,8 +29,10 @@
       </ion-col>
     </ion-row>
     </ion-grid>
+
   <ion-grid>
     <ion-row>
+
       <ion-col size="6" *ngFor="let product of productsFounds; index as i">
         <ion-card>
           <img [src]="product.photo+i">
@@ -78,9 +42,10 @@
           </ion-card-header>
           <ion-card-content>
             {{product.description}}
-            <ion-button (click)="addProducttoCart(product)">+Agregar</ion-button>
+            <ion-button (click)="addProducttoCart(product)"><ion-icon name="cart-outline"></ion-icon>Agregar</ion-button>
           </ion-card-content>
         </ion-card>
+        
       </ion-col>
       <ion-item-divider color="primary">
         <ion-label> Carrito </ion-label>
@@ -89,18 +54,20 @@
         <ion-card>
           <!-- <img [src]="product.photo"> -->
           <ion-card-header>
-            <ion-card-title>{{countProducttoCart(product) +" "+ product.name}} <ion-badge [color]="getColor(product.type)"> {{product.type}}</ion-badge> </ion-card-title>
-            <ion-card-subtitle> {{product.price | currency}}</ion-card-subtitle>
+            <ion-card-title>{{product.name}} <ion-badge [color]="getColor(product.type)"> {{product.type}}</ion-badge> </ion-card-title>
+            <ion-card-subtitle> {{product.price | currency}} {{"x"+countProducttoCart(product)}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             {{product.description}}
             <ion-button (click)="deleteProducttoCart(product)" color="danger"><ion-icon name="trash-outline"></ion-icon>Eliminar</ion-button>
+            <p>Precio de los productos: {{precioProducto(product) | currency}}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-item-divider color="primary">
-        <ion-label > Total: {{precio}} </ion-label>
+        <ion-label > Total: {{total | currency}} </ion-label>
       </ion-item-divider>
+
     </ion-row>
     </ion-grid>
 </ion-content>
