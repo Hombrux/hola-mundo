@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product.model';
+import { DataService } from '../data.service';
+
 
 @Component({
   selector: 'app-tab2',
@@ -12,11 +14,10 @@ export class Tab2Page {
   public products: Product[] = [];
   public productsFounds: Product[]=[];
   
-  public productsShop: Product[]=[];
-  public uniqueProducts:Set<Product> = new Set();
   public precio:number = 0;
-  public total:number = 0;
+  //public total:number = 0;
   
+  constructor(private dataService: DataService) {}
 
   public getColor(tipo:string):string{
     switch(tipo){
@@ -33,41 +34,42 @@ export class Tab2Page {
     return "primary"
   }
 
-  public addProducttoCart(producto:Product):void{
-    this.productsShop.push(producto);
-    this.uniqueProducts.add(producto);
-    this.total+=producto.price;
-    console.log(this.uniqueProducts);
+
+  public getProductos(){
+    return this.dataService.uniqueProducts;
+  }
+  
+  public getTotal(){
+    return this.dataService.total;
   }
 
+  // public addProducttoCart(producto:Product):void{
+  //   this.productsShop.push(producto);
+  //   this.uniqueProducts.add(producto);
+  //   this.total+=producto.price;
+  //   console.log(this.uniqueProducts);
+  // }
+
   public deleteProducttoCart(producto:Product):void{
-    this.productsShop.splice(this.productsShop.indexOf(producto),1)
+    this.dataService.sharedProducts.splice(this.dataService.sharedProducts.indexOf(producto),1)
     if(this.countProducttoCart(producto)==0){
-      this.uniqueProducts.delete(producto);
+      this.dataService.uniqueProducts.delete(producto);
     }
-    this.total-=producto.price;
+    this.dataService.total-=producto.price;
   }
 
   public countProducttoCart(producto:Product):number{
-    return this.productsShop.filter(p=> p===producto).length;
+    return this.dataService.sharedProducts.filter(p=> p===producto).length;
   }
 
-  public precioProducto(producto:Product):number{
-    if (this.productsShop.filter(p=> p===producto)) {
-      return producto.price*this.countProducttoCart(producto);
-    }
-    return 0;
-  }
-
-  //
-  selectType(type:string){
-    if(this.typeProduct===type){
-      this.statusType=false;
-    }else{
-      this.typeProduct = type;
-      this.statusType = true;
-    }
-  }
+  // selectType(type:string){
+  //   if(this.typeProduct===type){
+  //     this.statusType=false;
+  //   }else{
+  //     this.typeProduct = type;
+  //     this.statusType = true;
+  //   }
+  // }
 
 
 }

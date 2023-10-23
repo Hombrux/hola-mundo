@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product.model';
-import { Tab2Page } from '../tab2/tab2.page';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-tab1',
@@ -10,16 +10,15 @@ import { Tab2Page } from '../tab2/tab2.page';
 
 
 export class Tab1Page {
-  public tab2Page = new Tab2Page();
   public typeProduct = "";
   public statusType = false;
   public products: Product[] = [];
   public productsFounds: Product[]=[];
   
   public productsShop: Product[]=[];
-  public uniqueProducts:Set<Product> = new Set();
+  //public uniqueProducts:Set<Product> = new Set();
   public precio:number = 0;
-  public total:number = 0;
+  //public total:number = 0;
 
   public filter=[
     "Abarrotes",
@@ -27,7 +26,7 @@ export class Tab1Page {
     "Limpieza",
     "Farmacia",
   ];
-  constructor() {
+  constructor(private dataService: DataService) {
     this.products.push({
       name:"Coca Cola",
       price:20,
@@ -76,7 +75,6 @@ export class Tab1Page {
       photo:"https://picsum.photos/650/300?random=",
       type:"Farmacia"
     });
-
     this.productsFounds = this.products;
   }
 
@@ -104,6 +102,11 @@ export class Tab1Page {
     
   }
 
+  public addProducttoCart(producto:Product):void{
+    this.dataService.sharedProducts.push(producto);
+    this.dataService.uniqueProducts.add(producto);
+    this.dataService.total+=producto.price;
+  }
   //
   selectType(type:string){
     if(this.typeProduct===type){
