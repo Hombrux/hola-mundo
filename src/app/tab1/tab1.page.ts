@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product.model';
+import { Tab2Page } from '../tab2/tab2.page';
 
 @Component({
   selector: 'app-tab1',
@@ -9,6 +10,7 @@ import { Product } from '../models/product.model';
 
 
 export class Tab1Page {
+  public tab2Page = new Tab2Page();
   public typeProduct = "";
   public statusType = false;
   public products: Product[] = [];
@@ -18,13 +20,6 @@ export class Tab1Page {
   public uniqueProducts:Set<Product> = new Set();
   public precio:number = 0;
   public total:number = 0;
-
-  public addProducttoCart(producto:Product):void{
-    this.productsShop.push(producto);
-    this.uniqueProducts.add(producto);
-    this.total+=producto.price;
-    console.log(this.uniqueProducts);
-  }
 
   public filter=[
     "Abarrotes",
