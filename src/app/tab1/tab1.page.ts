@@ -6,6 +6,8 @@ import { Product } from '../models/product.model';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
+
 export class Tab1Page {
   public typeProduct = "";
   public statusType = false;
@@ -17,6 +19,13 @@ export class Tab1Page {
   public precio:number = 0;
   public total:number = 0;
 
+  public addProducttoCart(producto:Product):void{
+    this.productsShop.push(producto);
+    this.uniqueProducts.add(producto);
+    this.total+=producto.price;
+    console.log(this.uniqueProducts);
+  }
+
   public filter=[
     "Abarrotes",
     "Frutas y verduras",
@@ -27,7 +36,7 @@ export class Tab1Page {
     this.products.push({
       name:"Coca Cola",
       price:20,
-      photo:"https://picsum.photos/670/300?random=",
+      photo:"https://picsum.photos/650/300?random=",
       type:"Abarrotes"
     });
     this.products.push({
@@ -75,7 +84,6 @@ export class Tab1Page {
 
     this.productsFounds = this.products;
   }
-  
 
   public getColor(tipo:string):string{
     switch(tipo){
@@ -99,32 +107,6 @@ export class Tab1Page {
       }
     )
     
-  }
-
-  public addProducttoCart(producto:Product):void{
-    this.productsShop.push(producto);
-    this.uniqueProducts.add(producto);
-    this.total+=producto.price;
-    console.log(this.uniqueProducts);
-  }
-
-  public deleteProducttoCart(producto:Product):void{
-    this.productsShop.splice(this.productsShop.indexOf(producto),1)
-    if(this.countProducttoCart(producto)==0){
-      this.uniqueProducts.delete(producto);
-    }
-    this.total-=producto.price;
-  }
-
-  public countProducttoCart(producto:Product):number{
-    return this.productsShop.filter(p=> p===producto).length;
-  }
-
-  public precioProducto(producto:Product):number{
-    if (this.productsShop.filter(p=> p===producto)) {
-      return producto.price*this.countProducttoCart(producto);
-    }
-    return 0;
   }
 
   //
