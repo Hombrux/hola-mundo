@@ -16,7 +16,7 @@
       <ion-col size="12" *ngFor="let product of getProductos()">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>{{countProducttoCart(product)+" "+product.name}} <ion-badge [color]="getColor(product.type)"> {{product.type}}</ion-badge> </ion-card-title>
+            <ion-card-title>{{product.name}} <ion-badge [color]="getColor(product.type)"> {{product.type}}</ion-badge> </ion-card-title>
             <ion-card-subtitle> {{product.price| currency}} {{"x "+ countProducttoCart(product) + " = "}} {{product.price*countProducttoCart(product) | currency}} </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>

@@ -43,13 +43,6 @@ export class Tab2Page {
     return this.dataService.total;
   }
 
-  // public addProducttoCart(producto:Product):void{
-  //   this.productsShop.push(producto);
-  //   this.uniqueProducts.add(producto);
-  //   this.total+=producto.price;
-  //   console.log(this.uniqueProducts);
-  // }
-
   public deleteProducttoCart(producto:Product):void{
     this.dataService.sharedProducts.splice(this.dataService.sharedProducts.indexOf(producto),1)
     if(this.countProducttoCart(producto)==0){
@@ -61,15 +54,5 @@ export class Tab2Page {
   public countProducttoCart(producto:Product):number{
     return this.dataService.sharedProducts.filter(p=> p===producto).length;
   }
-
-  // selectType(type:string){
-  //   if(this.typeProduct===type){
-  //     this.statusType=false;
-  //   }else{
-  //     this.typeProduct = type;
-  //     this.statusType = true;
-  //   }
-  // }
-
 
 }
