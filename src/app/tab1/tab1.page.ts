@@ -107,7 +107,9 @@ export class Tab1Page {
     this.dataService.uniqueProducts.add(producto);
     this.dataService.total+=producto.price;
   }
-  //
+  public addProducttoFavorites(producto:Product):void{
+    this.dataService.favoriteProducts.add(producto);
+  }
   selectType(type:string){
     if(this.typeProduct===type){
       this.statusType=false;

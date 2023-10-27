@@ -43,6 +43,7 @@
           <ion-card-content>
             {{product.description}}
             <ion-button (click)="addProducttoCart(product)"><ion-icon name="cart-outline"></ion-icon>Agregar</ion-button>
+            <ion-button (click)="addProducttoFavorites(product)" color="warning"><ion-icon name="star-outline"></ion-icon>Añadir a Favoritos</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
