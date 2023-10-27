@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product.model';
 import { DataService } from '../data.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -14,11 +15,8 @@ export class Tab1Page {
   public statusType = false;
   public products: Product[] = [];
   public productsFounds: Product[]=[];
-  
   public productsShop: Product[]=[];
-  //public uniqueProducts:Set<Product> = new Set();
   public precio:number = 0;
-  //public total:number = 0;
 
   public filter=[
     "Abarrotes",
@@ -26,7 +24,7 @@ export class Tab1Page {
     "Limpieza",
     "Farmacia",
   ];
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, public toastController: ToastController) {
     this.products.push({
       name:"Coca Cola",
       price:20,
@@ -117,6 +115,26 @@ export class Tab1Page {
       this.typeProduct = type;
       this.statusType = true;
     }
+  }
+
+  async mensajeProducto(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Producto agregado al carrito',
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
+  }
+
+  async mensajeFavorito(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Producto agregado a favorito',
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
   }
 
 }

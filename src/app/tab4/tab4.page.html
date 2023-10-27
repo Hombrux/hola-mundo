@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Favoritos
+      Compras
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <ion-grid>
     <ion-row>
       <ion-item-divider color="primary">
-        <ion-label> Favoritos </ion-label>
+        <ion-label>Compras</ion-label>
       </ion-item-divider>
       <ion-col size="12" *ngFor="let product of getFavoriteProducts()">
         <ion-card>
@@ -20,7 +20,7 @@
           </ion-card-header>
           <ion-card-content>
             {{product.description}}
-            <ion-button (click)="addProducttoCart(product)" (click)="mensajeProducto('bottom')"><ion-icon name="cart-outline"></ion-icon>Agregar</ion-button>
+            <ion-button (click)="addProducttoCart(product)"><ion-icon name="cart-outline"></ion-icon>Agregar</ion-button>
             <ion-button (click)="deleteProductOfFavorites(product)" color="danger"><ion-icon name="star-outline"></ion-icon>Quitar de Favoritos</ion-button>
           </ion-card-content>
         </ion-card>

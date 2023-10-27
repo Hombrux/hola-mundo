@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product.model';
 import { DataService } from '../data.service';
-import { ToastController } from '@ionic/angular';
+
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-tab4',
+  templateUrl: 'tab4.page.html',
+  styleUrls: ['tab4.page.scss']
 })
-export class Tab3Page {
+export class Tab4Page {
 
-  constructor(private dataService: DataService, public toastController: ToastController) {}
+  constructor(private dataService: DataService) {}
 
   public getFavoriteProducts(){
     return this.dataService.favoriteProducts;
@@ -36,15 +36,5 @@ export class Tab3Page {
 
     }
     return "primary"
-  }
-
-  async mensajeProducto(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Producto agregado al carrito',
-      duration: 1500,
-      position: position,
-    });
-
-    await toast.present();
   }
 }
