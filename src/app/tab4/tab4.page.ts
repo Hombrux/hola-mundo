@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Compras } from '../models/product.model';
 import { DataService } from '../data.service';
 
 
@@ -12,17 +12,14 @@ export class Tab4Page {
 
   constructor(private dataService: DataService) {}
 
-  public getFavoriteProducts(){
-    return this.dataService.favoriteProducts;
+  public getCompras(){
+    return this.dataService.compras;
   }
-  public addProducttoCart(producto:Product):void{
-    this.dataService.sharedProducts.push(producto);
-    this.dataService.uniqueProducts.add(producto);
-    this.dataService.total+=producto.price;
-  }
-  public deleteProductOfFavorites(producto:Product):void{
-    this.dataService.favoriteProducts.delete(producto);
-  }
+
+  public eliminarCompra(compra: Compras):void{
+    this.dataService.compras.delete(compra);
+}
+
   public getColor(tipo:string):string{
     switch(tipo){
       case "Abarrotes":

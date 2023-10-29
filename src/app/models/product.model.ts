@@ -5,3 +5,7 @@ export interface Product{
     type:string;
     photo:string;
 }
+
+export interface Compras{
+    total:number;
+}

@@ -10,7 +10,7 @@
 
   <ion-grid>
     <ion-row>
-      <ion-item-divider color="primary">
+      <ion-item-divider color="dark">
         <ion-label> Carrito </ion-label>
       </ion-item-divider>
       <ion-col size="12" *ngFor="let product of getProductos()">
@@ -25,9 +25,9 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-item-divider color="primary">
+      <ion-item-divider color="dark">
         <ion-label > Total: {{getTotal() | currency}} </ion-label>
-        <ion-button color="dark"><ion-icon name="pricetags"></ion-icon>Realizar compra </ion-button>
+        <ion-button (click)="realizarCompra(getTotal())" color="success"><ion-icon name="pricetags"></ion-icon>Realizar compra </ion-button>
       </ion-item-divider>
     </ion-row>
     </ion-grid>

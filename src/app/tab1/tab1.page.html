@@ -42,8 +42,8 @@
           </ion-card-header>
           <ion-card-content>
             {{product.description}}
-            <ion-button id="open-toast" expand="block" (click)="addProducttoCart(product)" (click)="mensajeProducto('bottom')"><ion-icon name="cart-outline"></ion-icon>Agregar</ion-button>
-            <ion-button (click)="addProducttoFavorites(product)" (click)="mensajeFavorito('bottom')"  color="warning"><ion-icon name="star-outline"></ion-icon>Añadir a Favoritos</ion-button>
+            <ion-button color="dark" id="open-toast" expand="block" (click)="addProducttoCart(product)" (click)="mensajeProducto('top')"><ion-icon name="cart-outline"></ion-icon>Agregar</ion-button>
+            <ion-button (click)="addProducttoFavorites(product)" (click)="mensajeFavorito('top')"  color="warning"><ion-icon name="star-outline"></ion-icon>Añadir a Favoritos</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>

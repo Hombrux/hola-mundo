@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product.model';
+import { Compras } from '../models/product.model';
 import { DataService } from '../data.service';
 
 
@@ -43,13 +44,6 @@ export class Tab2Page {
     return this.dataService.total;
   }
 
-  // public addProducttoCart(producto:Product):void{
-  //   this.productsShop.push(producto);
-  //   this.uniqueProducts.add(producto);
-  //   this.total+=producto.price;
-  //   console.log(this.uniqueProducts);
-  // }
-
   public deleteProducttoCart(producto:Product):void{
     this.dataService.sharedProducts.splice(this.dataService.sharedProducts.indexOf(producto),1)
     if(this.countProducttoCart(producto)==0){
@@ -58,18 +52,19 @@ export class Tab2Page {
     this.dataService.total-=producto.price;
   }
 
+  public realizarCompra(total: number):void{
+      this.dataService.uniqueProducts.clear();
+      this.dataService.sharedProducts = [];
+      if(total!=0){
+        const compra: Compras = {
+          total: total
+        };
+        this.dataService.compras.add(compra);
+        this.dataService.total = 0;
+      }
+  }
+
   public countProducttoCart(producto:Product):number{
     return this.dataService.sharedProducts.filter(p=> p===producto).length;
   }
-
-  // selectType(type:string){
-  //   if(this.typeProduct===type){
-  //     this.statusType=false;
-  //   }else{
-  //     this.typeProduct = type;
-  //     this.statusType = true;
-  //   }
-  // }
-
-
 }
