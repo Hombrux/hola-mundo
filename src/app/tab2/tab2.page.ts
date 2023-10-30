@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Product } from '../models/product.model';
 import { Compras } from '../models/product.model';
 import { DataService } from '../data.service';
+import { format } from 'date-fns';
 
 
 @Component({
@@ -57,7 +58,8 @@ export class Tab2Page {
       this.dataService.sharedProducts = [];
       if(total!=0){
         const compra: Compras = {
-          total: total
+          total: total,
+          fecha: format(new Date(), 'dd/MM/yyyy HH:mm:ss')
         };
         this.dataService.compras.add(compra);
         this.dataService.total = 0;
